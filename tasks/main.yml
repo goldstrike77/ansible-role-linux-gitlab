@@ -1,0 +1,16 @@
+---
+- name: Include tasks for specific OS
+  include: '{{ ansible_os_family }}.yml'
+
+- name: Configure the firewall
+  include: 'firewall.yml'
+
+- name: Straight to getenforce selinux status
+  include: 'selinux.yml'
+
+- name: Configuration the GitLab
+  include: 'configureation.yml'
+
+- name: Registered with HashiCorp Consul
+  include: 'register.yml'
+  when: consul_public_register

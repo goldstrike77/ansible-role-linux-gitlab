@@ -1,0 +1,58 @@
+---
+# General parameters #
+gitlab_is_install: false # A boolean value, whether install the GitLab.
+gitlab_edition: 'ce' # 'ce' (Community Edition) or 'ee' (Enterprise Edition)
+gitlab_version: '11.11.2' # Specify the GitLab version.
+gitlab_selinux: false # SELinux security policy.
+gitlab_data_path: '/data' # This directory is used to store Git data.
+gitlab_domain: 'gitlab.example.com' # Defines domain name.
+gitlab_time_zone: 'Asia/Shanghai' # Defines global timezone. 
+gitlab_enable_https: false # Communicate with GitLab instance over a secure connection.
+
+# Listen port #
+gitlab_port_arg:
+  http: '80' # HTTP listen port.
+  https: '443' # HTTPs listen port.
+  exporter: '9168' # Exporter listen port.
+
+# Service Mesh #
+environments: 'SIT' # Define the service environment.
+consul_public_register: false # Whether register a exporter service with public consul client.
+consul_public_exporter_token: '00000000-0000-0000-0000-000000000000' # Public Consul client ACL token.
+consul_public_clients: 'localhost' # List of public consul clients.
+consul_public_http_port: '8500' # The consul HTTP API port.
+
+# Redis parameters #
+gitlab_redis_dept: true # A boolean value, whether installs external Redis.
+gitlab_redis_path: '{{ gitlab_data_path }}' # Specify the Redis data directory.
+gitlab_redis_requirepass: 'changeme' # Authorization clients password.
+gitlab_redis_maxmemory: '128' # A memory usage limit to the specified amount in MB.
+gitlab_redis_host: '127.0.0.1' # Redis server address.
+gitlab_redis_port: '6379' # Redis server port.
+gitlab_redis_ssl: false # Enables or disables Redis SSL encryption.
+
+# PostgreSQL parameters #
+gitlab_pgsql_dept: true # A boolean value, whether installs external PostgreSQL.
+gitlab_pgsql_version: '96' # Specify the PostgreSQL version.
+gitlab_pgsql_releases: 'PostgreSQL' # pgsql for PostgreSQL / pgpro for PostgresPro
+gitlab_pgsql_sa_pass: 'password' # PostgreSQL root account password
+gitlab_pgsql_mailto: 'somebody@example.com' # PostgreSQL report mail recipient
+gitlab_pgsql_system_type: 'small' # Define instance parameters.
+gitlab_pgsql_host: '127.0.0.1' # PostgreSQL instance communication address.
+gitlab_pgsql_port: '5432' # PostgreSQL instance communication ports.
+gitlab_pgsql_character_set: 'utf8' # Server's default character set.
+gitlab_pgsql_path: '{{ gitlab_data_path }}' # Specify the PostgreSQL data directory.
+gitlab_pgsql_bu_dbs_arg: # GitLab Database Variables.
+  - dbs: 'gitlabhq_production'
+    user: 'gitlab'
+    pass: 'changeme'
+    priv: 'ALL'
+    role: 'SUPERUSER'
+
+# Email #
+gitlab_email_arg:
+  enabled: true
+  from: 'gitlab@example.com'
+  display_name: 'GitLab example'
+  reply_to: 'do-not-reply@example.com'
+  subject_suffix: ''

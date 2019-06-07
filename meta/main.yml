@@ -1,0 +1,77 @@
+galaxy_info:
+  author: your name
+  description: your description
+  company: your company (optional)
+
+  # If the issue tracker for your role is not on github, uncomment the
+  # next line and provide a value
+  # issue_tracker_url: http://example.com/issue/tracker
+
+  # Some suggested licenses:
+  # - BSD (default)
+  # - MIT
+  # - GPLv2
+  # - GPLv3
+  # - Apache
+  # - CC-BY
+  license: license (GPLv2, CC-BY, etc)
+
+  min_ansible_version: 1.2
+
+  # If this a Container Enabled role, provide the minimum Ansible Container version.
+  # min_ansible_container_version:
+
+  # Optionally specify the branch Galaxy will use when accessing the GitHub
+  # repo for this role. During role install, if no tags are available,
+  # Galaxy will use this branch. During import Galaxy will access files on
+  # this branch. If Travis integration is configured, only notifications for this
+  # branch will be accepted. Otherwise, in all cases, the repo's default branch
+  # (usually master) will be used.
+  #github_branch:
+
+  #
+  # platforms is a list of platforms, and each platform has a name and a list of versions.
+  #
+  # platforms:
+  # - name: Fedora
+  #   versions:
+  #   - all
+  #   - 25
+  # - name: SomePlatform
+  #   versions:
+  #   - all
+  #   - 1.0
+  #   - 7
+  #   - 99.99
+
+  galaxy_tags: []
+    # List tags for your role here, one per line. A tag is a keyword that describes
+    # and categorizes the role. Users find roles by searching for tags. Be sure to
+    # remove the '[]' above, if you add tags to this list.
+    #
+    # NOTE: A tag is limited to a single word comprised of alphanumeric characters.
+    #       Maximum 20 tags per role.
+
+dependencies:
+  # List your role dependencies here, one per line. Be sure to remove the '[]' above,
+  # if you add dependencies to this list.
+  - role: 'ansible-role-linux-redis'
+    vars:
+      redis_path: '{{ gitlab_redis_path }}'
+      redis_requirepass: '{{ gitlab_redis_requirepass }}'
+      redis_maxmemory: '{{ gitlab_redis_maxmemory }}'
+      redis_port: '{{ gitlab_redis_port }}'
+    when: gitlab_redis_dept
+  - role: 'ansible-role-linux-postgresql'
+    vars:
+      pgsql_version: '{{ gitlab_pgsql_version }}'
+      pgsql_releases: '{{ gitlab_pgsql_releases }}'
+      pgsql_sa_pass: '{{ gitlab_pgsql_sa_pass }}'
+      pgsql_mailto: '{{ gitlab_pgsql_mailto }}'
+      pgsql_system_type: '{{ gitlab_pgsql_system_type }}'
+      pgsql_host: '{{ gitlab_pgsql_host }}'
+      pgsql_port: '{{ gitlab_pgsql_port }}'
+      pgsql_character_set: '{{ gitlab_pgsql_character_set }}'
+      pgsql_path: '{{ gitlab_pgsql_path }}'
+      pgsql_bu_dbs_arg: '{{ gitlab_pgsql_bu_dbs_arg }}'
+    when: gitlab_pgsql_dept

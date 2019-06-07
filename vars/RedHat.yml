@@ -1,0 +1,17 @@
+---
+gitlab_repo_name: 'gitlab-{{ gitlab_edition }}'
+
+gitlab_repo:
+  - name: 'gitlab_gitlab-{{ gitlab_edition }}'
+    url: 'http://mirrors.tuna.tsinghua.edu.cn/gitlab-{{ gitlab_edition }}/yum/el{{ansible_distribution_version.split(".")[0]}}/'
+  - name: 'runner_gitlab-runner'
+    url: 'http://mirrors.tuna.tsinghua.edu.cn/gitlab-runner/yum/el{{ansible_distribution_version.split(".")[0]}}/'
+
+gitlab_packages:
+  - 'gitlab-{{ gitlab_edition }}-{{ gitlab_version }}*'
+  - 'gitlab-runner-{{ gitlab_version }}*'
+  - 'curl'
+  - 'libselinux-python'
+  - 'libsemanage-python'
+  - 'openssh-server'
+  - 'policycoreutils-python'

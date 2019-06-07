@@ -1,0 +1,42 @@
+---
+- name: Creating GitLab folder
+  file:
+    dest: '{{ gitlab_data_path }}/gitlab'
+    state: directory
+    owner: 'git'
+    group: 'root'
+    mode: '0700'
+
+- name: GitLab main configuration file transfer
+  template:
+    src: 'gitlab.v{{ gitlab_version.split(".")[0] }}.rb.j2'
+    dest: '/etc/gitlab/gitlab.rb'
+    owner: root
+    group: root
+    mode: 0600
+  register: conf_update
+
+- name: GitLab certificate file transfer
+  copy:
+    src: 'ssl/'
+    dest: '/etc/gitlab/ssl/'
+    owner: 'root'
+    group: 'root'
+    mode: 0644
+  when: gitlab_enable_https
+  register: ssl_update
+
+- name: GitLab configure opeations
+  block:
+    - name: Restart GitLab Runit supervision process
+      systemd:
+        name: 'gitlab-runsvdir'
+        enabled: 'yes'
+        state: 'restarted'
+      failed_when: false
+    - name: Reconfigure GitLab
+      command: >
+        /bin/gitlab-ctl reconfigure
+        creates=/var/opt/gitlab/bootstrapped
+      failed_when: false
+  when: conf_update is changed

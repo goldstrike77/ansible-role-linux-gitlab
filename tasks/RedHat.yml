@@ -1,0 +1,21 @@
+---
+- name: Include OS-specific variables
+  include_vars: '{{ ansible_os_family }}.yml'
+
+- name: Add GitLab YUM repositories
+  yum_repository:
+    name: '{{ item.name }}'
+    description: '{{ item.name }} repo'
+    file: '{{ gitlab_repo_name }}'
+    baseurl: '{{ item.url }}'
+    gpgcheck: 'no'
+    timeout: '60'
+  loop: '{{ gitlab_repo }}'
+
+- name: Install the GitLab packages
+  yum:
+    name: '{{ item }}'
+    state: 'present'
+    validate_certs: 'no'
+    disable_gpg_check: 'yes'
+  loop: '{{ gitlab_packages }}'
