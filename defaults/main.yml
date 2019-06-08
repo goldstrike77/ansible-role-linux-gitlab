@@ -7,7 +7,9 @@ gitlab_selinux: false # SELinux security policy.
 gitlab_data_path: '/data' # This directory is used to store Git data.
 gitlab_domain: 'gitlab.example.com' # Defines domain name.
 gitlab_time_zone: 'Asia/Shanghai' # Defines global timezone. 
-gitlab_enable_https: false # Communicate with GitLab instance over a secure connection.
+gitlab_enable_https: true # Communicate with GitLab instance over a secure connection.
+gitlab_root_password: 'changeme' # Default root password.
+gitlab_client_max_body_size: '250m' # The max attachment file size.
 
 # Listen port #
 gitlab_port_arg:
@@ -49,10 +51,25 @@ gitlab_pgsql_bu_dbs_arg: # GitLab Database Variables.
     priv: 'ALL'
     role: 'SUPERUSER'
 
-# Email #
+# Email parameters #
 gitlab_email_arg:
   enabled: true
   from: 'gitlab@example.com'
   display_name: 'GitLab example'
   reply_to: 'do-not-reply@example.com'
   subject_suffix: ''
+
+# SMTP parameters #
+gitlab_smtp_arg:
+  enable: true
+  address: 'localhost'
+  port: 25
+  user_name: 'smtp user'
+  password: 'smtp password'
+  domain: 'localhost'
+  authentication: 'login'
+  tls: false
+  openssl_verify_mode: 'none'
+  enable_starttls_auto: false
+  ssl: false
+  force_ssl: false

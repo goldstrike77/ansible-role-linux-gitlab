@@ -16,18 +16,12 @@
     mode: 0600
   register: conf_update
 
-- name: GitLab certificate file transfer
-  copy:
-    src: 'ssl/'
-    dest: '/etc/gitlab/ssl/'
-    owner: 'root'
-    group: 'root'
-    mode: 0644
-  when: gitlab_enable_https
-  register: ssl_update
-
 - name: GitLab configure opeations
   block:
+    - name: Shutoff GitLab
+      command: >
+        /bin/gitlab-ctl stop
+      failed_when: false
     - name: Restart GitLab Runit supervision process
       systemd:
         name: 'gitlab-runsvdir'
