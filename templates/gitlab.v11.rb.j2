@@ -460,7 +460,7 @@ gitlab_rails['initial_root_password'] = "{{ gitlab_root_password | default('chan
 ###! Docs: https://docs.gitlab.com/omnibus/settings/database.html
 ###! **Only needed if you use an external database.**
 gitlab_rails['db_adapter'] = 'postgresql'
-gitlab_rails['db_encoding'] = '{{ gitlab_pgsql_character_set }}'
+gitlab_rails['db_encoding'] = 'utf8'
 # gitlab_rails['db_collation'] = nil
 gitlab_rails['db_database'] = '{{ gitlab_pgsql_bu_dbs_arg[0].dbs }}'
 gitlab_rails['db_pool'] = 10

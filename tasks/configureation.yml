@@ -3,7 +3,7 @@
   file:
     dest: '{{ gitlab_data_path }}/gitlab'
     state: directory
-    owner: 'git'
+    owner: 'root'
     group: 'root'
     mode: '0700'
 
