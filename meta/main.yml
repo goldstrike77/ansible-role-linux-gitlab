@@ -64,14 +64,14 @@ dependencies:
     when: gitlab_redis_dept
   - role: 'ansible-role-linux-postgresql'
     vars:
-      pgsql_version: '{{ gitlab_pgsql_version }}'
-      pgsql_releases: '{{ gitlab_pgsql_releases }}'
+      pgsql_version: '96'
+      pgsql_releases: 'PostgreSQL'
       pgsql_sa_pass: '{{ gitlab_pgsql_sa_pass }}'
       pgsql_mailto: '{{ gitlab_pgsql_mailto }}'
-      pgsql_system_type: '{{ gitlab_pgsql_system_type }}'
+      pgsql_system_type: 'small'
       pgsql_host: '{{ gitlab_pgsql_host }}'
       pgsql_port: '{{ gitlab_pgsql_port }}'
-      pgsql_character_set: '{{ gitlab_pgsql_character_set }}'
+      pgsql_character_set: 'utf8'
       pgsql_path: '{{ gitlab_pgsql_path }}'
       pgsql_bu_dbs_arg: '{{ gitlab_pgsql_bu_dbs_arg }}'
     when: gitlab_pgsql_dept

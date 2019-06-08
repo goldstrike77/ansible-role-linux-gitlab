@@ -1,15 +1,15 @@
 ---
 # General parameters #
 gitlab_is_install: false # A boolean value, whether install the GitLab.
-gitlab_edition: 'ce' # 'ce' (Community Edition) or 'ee' (Enterprise Edition)
-gitlab_version: '11.11.2' # Specify the GitLab version.
-gitlab_selinux: false # SELinux security policy.
+gitlab_client_max_body_size: '250m' # Specify the max attachment file size.
 gitlab_data_path: '/data' # This directory is used to store Git data.
 gitlab_domain: 'gitlab.example.com' # Defines domain name.
-gitlab_time_zone: 'Asia/Shanghai' # Defines global timezone. 
+gitlab_edition: 'ce' # 'ce' (Community Edition) or 'ee' (Enterprise Edition)
 gitlab_enable_https: true # Communicate with GitLab instance over a secure connection.
 gitlab_root_password: 'changeme' # Default root password.
-gitlab_client_max_body_size: '250m' # The max attachment file size.
+gitlab_selinux: false # SELinux security policy.
+gitlab_time_zone: 'Asia/Shanghai' # Defines global timezone. 
+gitlab_version: '11.11.2' # Specify the GitLab version.
 
 # Listen port #
 gitlab_port_arg:
@@ -26,24 +26,20 @@ consul_public_http_port: '8500' # The consul HTTP API port.
 
 # Redis parameters #
 gitlab_redis_dept: true # A boolean value, whether installs external Redis.
-gitlab_redis_path: '{{ gitlab_data_path }}' # Specify the Redis data directory.
-gitlab_redis_requirepass: 'changeme' # Authorization clients password.
-gitlab_redis_maxmemory: '128' # A memory usage limit to the specified amount in MB.
 gitlab_redis_host: '127.0.0.1' # Redis server address.
+gitlab_redis_maxmemory: '128' # A memory usage limit to the specified amount in MB.
+gitlab_redis_path: '{{ gitlab_data_path }}' # Specify the Redis data directory.
 gitlab_redis_port: '6379' # Redis server port.
+gitlab_redis_requirepass: 'changeme' # Authorization clients password.
 gitlab_redis_ssl: false # Enables or disables Redis SSL encryption.
 
 # PostgreSQL parameters #
 gitlab_pgsql_dept: true # A boolean value, whether installs external PostgreSQL.
-gitlab_pgsql_version: '96' # Specify the PostgreSQL version.
-gitlab_pgsql_releases: 'PostgreSQL' # pgsql for PostgreSQL / pgpro for PostgresPro
-gitlab_pgsql_sa_pass: 'password' # PostgreSQL root account password
-gitlab_pgsql_mailto: 'somebody@example.com' # PostgreSQL report mail recipient
-gitlab_pgsql_system_type: 'small' # Define instance parameters.
 gitlab_pgsql_host: '127.0.0.1' # PostgreSQL instance communication address.
-gitlab_pgsql_port: '5432' # PostgreSQL instance communication ports.
-gitlab_pgsql_character_set: 'utf8' # Server's default character set.
+gitlab_pgsql_mailto: 'somebody@example.com' # PostgreSQL report mail recipient.
 gitlab_pgsql_path: '{{ gitlab_data_path }}' # Specify the PostgreSQL data directory.
+gitlab_pgsql_port: '5432' # PostgreSQL instance communication ports.
+gitlab_pgsql_sa_pass: 'changeme' # PostgreSQL root account password.
 gitlab_pgsql_bu_dbs_arg: # GitLab Database Variables.
   - dbs: 'gitlabhq_production'
     user: 'gitlab'
@@ -52,7 +48,7 @@ gitlab_pgsql_bu_dbs_arg: # GitLab Database Variables.
     role: 'SUPERUSER'
 
 # Email parameters #
-gitlab_email_arg:
+gitlab_email_arg: # Define mail parameters.
   enabled: true
   from: 'gitlab@example.com'
   display_name: 'GitLab example'
@@ -60,7 +56,7 @@ gitlab_email_arg:
   subject_suffix: ''
 
 # SMTP parameters #
-gitlab_smtp_arg:
+gitlab_smtp_arg: # Define SMTP server parameters
   enable: true
   address: 'localhost'
   port: 25
