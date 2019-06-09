@@ -459,34 +459,30 @@ gitlab_rails['initial_root_password'] = "{{ gitlab_root_password | default('chan
 ### GitLab database settings
 ###! Docs: https://docs.gitlab.com/omnibus/settings/database.html
 ###! **Only needed if you use an external database.**
+{% if gitlab_pgsql_dept %}
 gitlab_rails['db_adapter'] = 'postgresql'
 gitlab_rails['db_encoding'] = 'utf8'
-# gitlab_rails['db_collation'] = nil
 gitlab_rails['db_database'] = '{{ gitlab_pgsql_bu_dbs_arg[0].dbs }}'
 gitlab_rails['db_pool'] = 10
 gitlab_rails['db_username'] = '{{ gitlab_pgsql_bu_dbs_arg[0].user }}'
 gitlab_rails['db_password'] = '{{ gitlab_pgsql_bu_dbs_arg[0].pass }}'
 gitlab_rails['db_host'] = '{{ gitlab_pgsql_host }}'
 gitlab_rails['db_port'] = {{ gitlab_pgsql_port }}
-# gitlab_rails['db_socket'] = nil
-# gitlab_rails['db_sslmode'] = nil
-# gitlab_rails['db_sslcompression'] = 0
-# gitlab_rails['db_sslrootcert'] = nil
-# gitlab_rails['db_prepared_statements'] = false
-# gitlab_rails['db_statements_limit'] = 1000
-
+{% endif %}
 
 ### GitLab Redis settings
 ###! Connect to your own Redis instance
 ###! Docs: https://docs.gitlab.com/omnibus/settings/redis.html
 
 #### Redis TCP connection
+{% if gitlab_redis_dept %}
 gitlab_rails['redis_host'] = '{{ gitlab_redis_host }}'
 gitlab_rails['redis_port'] = {{ gitlab_redis_port }}
 gitlab_rails['redis_ssl'] = {{ gitlab_redis_ssl | bool | to_json }}
 gitlab_rails['redis_password'] = '{{ gitlab_redis_requirepass }}'
 gitlab_rails['redis_database'] = 1
 gitlab_rails['redis_enable_client'] = true
+{% endif %}
 
 #### Redis local UNIX socket (will be disabled if TCP method is used)
 # gitlab_rails['redis_socket'] = "/var/opt/gitlab/redis/redis.socket"
@@ -786,7 +782,7 @@ gitlab_rails['smtp_force_ssl'] = {{ gitlab_smtp_arg.force_ssl | bool | to_json }
 ###! By default, reconfigure reloads postgresql if it is running. If you
 ###! change any of these settings, be sure to run `gitlab-ctl restart postgresql`
 ###! after reconfigure in order for the changes to take effect.
-postgresql['enable'] = false
+postgresql['enable'] = {% if gitlab_pgsql_dept %}false{% else %}true{% endif %}
 # postgresql['listen_address'] = nil
 # postgresql['port'] = 5432
 # postgresql['data_dir'] = "/var/opt/gitlab/postgresql/data"
@@ -913,7 +909,7 @@ postgresql['enable'] = false
 ##! Docs: https://docs.gitlab.com/omnibus/settings/redis.html
 ################################################################################
 
-redis['enable'] = false
+redis['enable'] = {% if gitlab_redis_dept %}false{% else %}true{% endif %}
 # redis['ha'] = false
 # redis['hz'] = 10
 # redis['dir'] = "/var/opt/gitlab/redis"
