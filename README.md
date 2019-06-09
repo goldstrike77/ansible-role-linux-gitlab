@@ -83,13 +83,14 @@ There are some variables in defaults/main.yml which can (Or needs to) be overrid
 * `gitlab_pgsql_path`: Specify the PostgreSQL data directory.
 * `gitlab_pgsql_port`: PostgreSQL instance communication ports.
 * `gitlab_pgsql_sa_pass`: PostgreSQL root account password.
+* `gitlab_pgsql_backupset_arg`: # PostgreSQL backup parameters.
 * `gitlab_pgsql_bu_dbs_arg`: GitLab Database Variables.
 
 ##### Email parameters
 * `gitlab_email_arg`: Define mail parameters.
 
 ##### SMTP parameters
-* `gitlab_smtp_arg`: Define SMTP server parameters
+* `gitlab_smtp_arg`: Define SMTP server parameters.
 
 ## Dependencies
 - Ansible versions > 2.6 are supported.
@@ -140,6 +141,9 @@ You can also use the group_vars or the host_vars files for setting the variables
     gitlab_pgsql_path: '{{ gitlab_data_path }}'
     gitlab_pgsql_port: '5432'
     gitlab_pgsql_sa_pass: 'changeme'
+    gitlab_pgsql_backupset_arg:
+      keep: '2'
+      encryptkey: 'kDLQzpZKqtl58SM5lTIj5AG3n8878Aie'
     gitlab_pgsql_bu_dbs_arg:
       - dbs: 'gitlabhq_production'
         user: 'gitlab'

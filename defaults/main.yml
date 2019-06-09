@@ -40,6 +40,9 @@ gitlab_pgsql_mailto: 'somebody@example.com' # PostgreSQL report mail recipient.
 gitlab_pgsql_path: '{{ gitlab_data_path }}' # Specify the PostgreSQL data directory.
 gitlab_pgsql_port: '5432' # PostgreSQL instance communication ports.
 gitlab_pgsql_sa_pass: 'changeme' # PostgreSQL root account password.
+gitlab_pgsql_backupset_arg:
+  keep: '2' # The number of full backups (and its incrementals) to keep.
+  encryptkey: 'kDLQzpZKqtl58SM5lTIj5AG3n8878Aie' # BackupSet encryption key, Generate by [openssl rand -base64 24].
 gitlab_pgsql_bu_dbs_arg: # GitLab Database Variables.
   - dbs: 'gitlabhq_production'
     user: 'gitlab'
