@@ -83,6 +83,7 @@ There are some variables in defaults/main.yml which can (Or needs to) be overrid
 * `gitlab_pgsql_path`: Specify the PostgreSQL data directory.
 * `gitlab_pgsql_port`: PostgreSQL instance communication ports.
 * `gitlab_pgsql_sa_pass`: PostgreSQL root account password.
+* `gitlab_pgsql_user_pass`: PostgreSQL user account password.
 * `gitlab_pgsql_backupset_arg`: # PostgreSQL backup parameters.
 * `gitlab_pgsql_bu_dbs_arg`: GitLab Database Variables.
 
@@ -141,13 +142,14 @@ You can also use the group_vars or the host_vars files for setting the variables
     gitlab_pgsql_path: '{{ gitlab_data_path }}'
     gitlab_pgsql_port: '5432'
     gitlab_pgsql_sa_pass: 'changeme'
+    gitlab_pgsql_user_pass: 'changeme'
     gitlab_pgsql_backupset_arg:
       keep: '2'
       encryptkey: 'kDLQzpZKqtl58SM5lTIj5AG3n8878Aie'
     gitlab_pgsql_bu_dbs_arg:
       - dbs: 'gitlabhq_production'
         user: 'gitlab'
-        pass: 'changeme'
+        pass: '{{ gitlab_pgsql_user_pass }}'
         priv: 'ALL'
         role: 'SUPERUSER'
     gitlab_email_arg:
