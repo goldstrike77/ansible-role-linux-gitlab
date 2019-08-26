@@ -61,7 +61,7 @@ dependencies:
       redis_requirepass: '{{ gitlab_redis_requirepass }}'
       redis_maxmemory: '{{ gitlab_redis_maxmemory }}'
       redis_port: '{{ gitlab_redis_port }}'
-    when: gitlab_redis_dept
+    when: gitlab_redis_dept | bool
   - role: 'ansible-role-linux-postgresql'
     vars:
       pgsql_version: '96'
@@ -75,4 +75,4 @@ dependencies:
       pgsql_path: '{{ gitlab_pgsql_path }}'
       pgsql_backupset_arg: '{{ gitlab_pgsql_backupset_arg }}'
       pgsql_bu_dbs_arg: '{{ gitlab_pgsql_bu_dbs_arg }}'
-    when: gitlab_pgsql_dept
+    when: gitlab_pgsql_dept | bool
