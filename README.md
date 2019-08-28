@@ -61,6 +61,8 @@ There are some variables in defaults/main.yml which can (Or needs to) be overrid
 * `gitlab_port_arg.exporter`: Exporter listen port.
 
 ##### Service Mesh
+* `subscription`: Define the service subscription.
+* `region`: Define the service region.
 * `environments`: Define the service environment.
 * `consul_public_register`: Whether register a exporter service with public consul client.
 * `consul_public_exporter_token`: Public Consul client ACL token.
@@ -173,6 +175,8 @@ You can also use the group_vars or the host_vars files for setting the variables
       enable_starttls_auto: false
       ssl: false
       force_ssl: false
+    subscription: 'default'
+    region: 'default'
     environments: 'SIT'
     consul_public_register: false
     consul_public_exporter_token: '00000000-0000-0000-0000-000000000000'
