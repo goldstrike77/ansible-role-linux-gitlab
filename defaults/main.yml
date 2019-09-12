@@ -57,6 +57,7 @@ gitlab_pgsql_bu_dbs_arg: # GitLab Database Variables.
     pass: '{{ gitlab_pgsql_user_pass }}'
     priv: 'ALL'
     role: 'SUPERUSER'
+    net: '127.0.0.1'
 
 # Email parameters #
 gitlab_email_arg: # Define mail parameters.
