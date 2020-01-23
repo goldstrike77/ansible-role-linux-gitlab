@@ -60,14 +60,6 @@ There are some variables in defaults/main.yml which can (Or needs to) be overrid
 * `gitlab_port_arg.https`: HTTPs listen port.
 * `gitlab_port_arg.exporter`: Exporter listen port.
 
-##### Service Mesh
-* `environments`: Define the service environment.
-* `tags`: Define the service custom label.
-* `consul_public_register`: Whether register a exporter service with public consul client.
-* `consul_public_exporter_token`: Public Consul client ACL token.
-* `consul_public_clients`: List of public consul clients.
-* `consul_public_http_port`: The consul HTTP API port.
-
 ##### Redis parameters
 * `gitlab_redis_dept`: A boolean value, whether installs external Redis.
 * `gitlab_redis_host`:  Redis server address.
@@ -94,6 +86,15 @@ There are some variables in defaults/main.yml which can (Or needs to) be overrid
 
 ##### SMTP parameters
 * `gitlab_smtp_arg`: Define SMTP server parameters.
+
+##### Service Mesh
+* `environments`: Define the service environment.
+* `tags`: Define the service custom label.
+* `consul_public_register`: Whether register a exporter service with public consul client.
+* `consul_public_exporter_token`: Public Consul client ACL token.
+* `consul_public_http_prot`: The consul Hypertext Transfer Protocol.
+* `consul_public_clients`: List of public consul clients.
+* `consul_public_http_port`: The consul HTTP API port.
 
 ## Dependencies
 - Ansible versions > 2.6 are supported.
@@ -183,8 +184,10 @@ You can also use the group_vars or the host_vars files for setting the variables
       region: 'IDC01'
     consul_public_register: false
     consul_public_exporter_token: '00000000-0000-0000-0000-000000000000'
-    consul_public_clients: 'localhost'
+    consul_public_http_prot: 'https'
     consul_public_http_port: '8500'
+    consul_public_clients:
+      - '127.0.0.1'
 
 ## License
 ![](https://img.shields.io/badge/MIT-purple.svg?style=for-the-badge)
